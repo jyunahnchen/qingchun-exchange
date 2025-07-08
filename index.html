@@ -540,6 +540,19 @@ async function submitStoryToAirtable(storyData) {
     }
 
     try {
+        // 🔍 加在這裡！
+        console.log('送出到 Airtable 的內容:', {
+            'Name': `${storyData.type}｜${storyData.title || '無標題'}`,
+            '故事類型': storyData.type,
+            '標題': storyData.title,
+            '內容': storyData.content,
+            '匿名暱稱': storyData.nickname || '匿名',
+            '心動♡數量': 0,
+            '我也是': 0,
+            '好溫暖': 0,
+            'Timestamp': new Date().toISOString()
+        });
+
         const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableName}`, {
             method: 'POST',
             headers: {
@@ -576,6 +589,7 @@ async function submitStoryToAirtable(storyData) {
         throw error;
     }
 }
+
 
 
    async function updateReactionInAirtable(storyId, reactionType, newCount) {
