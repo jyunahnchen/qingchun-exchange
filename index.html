@@ -576,6 +576,8 @@ async function submitStoryToAirtable(storyData) {
         });
 
         if (!response.ok) {
+                const errorDetail = await response.json(); // << 加這行
+    console.error('Airtable 回傳錯誤內容:', errorDetail); // << 以及這行
             throw new Error('無法提交到 Airtable');
         }
 
